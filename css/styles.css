@@ -1,0 +1,50 @@
+.canvas {
+    border: 2px black solid;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px
+}
+
+#canvas-draft {
+    background-color: transparent;
+}
+
+#canvas-real {
+    background-color: white;
+}
+
+body {
+    overflow: hidden;
+    background-image: url("https://backgrounddownload.com/wp-content/uploads/2018/09/sky-blue-background-designs-4.jpg");
+    background-color: rgba(81, 255, 0, 0.116);
+    background-repeat: no-repeat;
+    background-position: absolute;
+}
+
+#canvas-container {
+    position: absolute;
+    height: 720px;
+    left: 200px
+}
+
+.colorPickFormat {
+    position: absolute;
+    right: 600px
+}
+
+.btn {
+    border: 2.5px #000000 solid;
+    cursor: pointer;
+}
+
+.btn:hover {
+    color: #000000;
+    border-color: #c05a07;
+    transform: scale(1.1);
+}
+
+#pixel {
+    border: 2px navy solid;
+}

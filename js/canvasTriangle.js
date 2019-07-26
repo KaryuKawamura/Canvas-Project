@@ -1,4 +1,4 @@
-class DrawingLine extends PaintFunction {
+class DrawingTriangle extends PaintFunction {
   constructor(contextReal, contextDraft, options) {
     super();
     this.contextReal = contextReal;
@@ -13,6 +13,7 @@ class DrawingLine extends PaintFunction {
     this.origY = coord[1];
     this.contextDraft.moveTo(coord[0], coord[1]);
     this.contextDraft.lineTo(coord[0], coord[1]);
+    this.contextDraft.lineTo(coord[0] * 0.5, coord[1] * 0.5);
     this.contextDraft.stroke();
   }
   onDragging(coord, event, options) {
@@ -22,7 +23,10 @@ class DrawingLine extends PaintFunction {
     this.contextDraft.beginPath();
     this.contextDraft.moveTo(this.origX, this.origY);
     this.contextDraft.lineTo(coord[0], coord[1]);
+    this.contextDraft.lineTo(coord[0] * 0.5, coord[0] * 0.5);
+    this.contextDraft.lineTo(this.origX, this.origY);
     this.contextDraft.stroke();
+    this.contextDraft.closePath();
   }
 
   onMouseMove() {}
@@ -30,18 +34,15 @@ class DrawingLine extends PaintFunction {
     this.contextDraft.clearRect(0, 0, canvasDraft.width, canvasDraft.height);
     this.contextReal.strokeStyle = options.strokeStyle;
     this.contextReal.lineWidth = options.lineWidth;
+    this.contextReal.lineJoin = "round";
     this.contextReal.beginPath();
     this.contextReal.moveTo(this.origX, this.origY);
     this.contextReal.lineTo(coord[0], coord[1]);
+    this.contextReal.lineTo(coord[0] * 0.5, coord[0] * 0.5);
+    this.contextReal.lineTo(this.origX, this.origY);
     this.contextReal.stroke();
+    this.contextReal.closePath();
   }
   onMouseLeave() {}
   onMouseEnter() {}
-
-  draw(x, y) {
-    this.context.lineTo(x, y);
-    this.context.moveTo(x, y);
-    this.context.closePath();
-    this.context.stroke();
-  }
 }

@@ -1,0 +1,274 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+  <link href="css/styles.css" rel="stylesheet" type="text/css" />
+  <!-- Spectrum Colorpicker CSS -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+    integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+
+<body>
+  <div id="canvas-container">
+    <canvas id="canvas-real" class="canvas" width="1150px" height="720px"></canvas>
+    <canvas id="canvas-draft" class="canvas" width="1150px" height="720px"></canvas>
+  </div>
+
+  <!-- Buttons -->
+  <div class="buttons">
+    <div><input type="text" id="flat" class="colorPickFormat" /></div>
+    <BR />
+
+    <div>
+      <span class="btn btn-primary btn-lg fas fa-pen" id="drawing-draw"></span>
+      <span class="btn btn-info btn-lg 	fas fa-square" id="drawing-rectangle"></span>
+      <span class="btn btn-danger btn-lg glyphicon glyphicon-minus" id="drawing-line"></span>
+    </div>
+    </br>
+    <div>
+      <span class="btn btn-success btn-lg 	fas fa-circle" id="drawing-circle"></span>
+      <span class="btn btn-warning btn-lg fas fa-vector-square" id="drawing-polygon"></span>
+      <span class="btn btn-info btn-lg fas fa-trash" id="drawing-erase"></span>
+    </div>
+    <br>
+    <div>
+      <span class="btn btn-primary btn-lg fas fa-cat" id="drawing-nyan"></span>
+      <span class="btn btn-primary btn-lg fas fa-caret-up fa-x2" id="drawing-triangle"></span>
+      <span class="btn btn-primary btn-lg fas fa-archway" id="drawing-arc"></span>
+    </div>
+    <BR />
+    <div>
+      <button type="button" class="btn btn-danger" id="btnUndo">Undo</button>
+
+      <button type="button" class="btn btn-danger" id="btnRedo">Redo</button>
+
+    </div>
+    <BR />
+    <div>
+      <button type="button" class="btn btn-warning btn-xl" id="btnClear">Clear</button>
+
+      <button type="button" class="btn btn-warning" id="btnSave">Save</button>
+    </div>
+    </BR>
+
+
+    <select id="pixel" name="Pixel">
+      <option value="6">6</option>
+      <option value="8">8</option>
+      <option value="10">10</option>
+      <option value="12">12</option>
+      <option value="14">14</option>
+      <option value="16">16</option>
+      <option value="18">18</option>
+      <option value="20">20</option>
+      <option value="22">22</option>
+      <option value="24">24</option>
+      <option value="26">26</option>
+      <option value="28">28</option>
+      <option value="30">30</option>
+      <option value="32">32</option>
+      <option value="34">34</option>
+      <option value="36">36</option>
+      <option value="38">38</option>
+      <option value="40">40</option>
+    </select>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <!-- jJquery for chrome set up -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/canvas-common.js"></script>
+    <!-- add local main.js -->
+
+    <!-- Spectrum Color Picker, JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.js"></script>
+
+    <script src="js/canvasDraw.js"></script>
+    <script src="js/canvasRect.js"></script>
+    <script src="js/canvasCircle.js"></script>
+    <script src="js/canvas.Erase.js"></script>
+    <script src="js/canvasEllipse.js"></script>
+    <script src="js/canvasLine.js"></script>
+    <script src="js/canvasPolygon.js"></script>
+    <script src="js/canvasNyan.js"></script>
+    <script src="js/canvasTriangle.js"></script>
+    <script src="js/canvasEtriangle.js"></script>
+    <script src="js/canvasArc.js"></script>
+
+    <script type="text/javascript">
+
+      //test up
+      ////#1 on Button Event
+      $("#drawing-draw").click(() => {
+        // console.log('Rect')
+        currentFunction = new Draw(contextReal, contextDraft, options);
+      });
+
+      $("#drawing-rectangle").click(() => {
+        // console.log(options)
+        // console.log('Line')
+        currentFunction = new DrawingRectangle(
+          contextReal,
+          contextDraft,
+          options
+        );
+      });
+      $("#drawing-circle").click(() => {
+        // console.log('Rect')
+        currentFunction = new DrawingEllipse(
+          contextReal,
+          contextDraft,
+          options
+        );
+      });
+      $("#drawing-line").click(() => {
+        // console.log('Rect')
+        currentFunction = new DrawingLine(contextReal, contextDraft, options);
+      });
+      $("#drawing-polygon").click(() => {
+        // console.log('Rect')
+        currentFunction = new DrawingPolygon(
+          contextReal,
+          contextDraft,
+          options
+        );
+      });
+      $("#drawing-erase").click(() => {
+        // console.log('Rect')
+        currentFunction = new Erase(contextReal, contextDraft, options);
+      });
+      $("#drawing-nyan").click(() => {
+        // console.log('Rect')
+        currentFunction = new Nyan(contextReal, contextDraft, options);
+      });
+      $("#drawing-triangle").click(() => {
+        // console.log('Rect')
+        currentFunction = new DrawingTriangle(contextReal, contextDraft, options);
+        
+      });
+      $("#drawing-arc").click(() => {
+        // console.log('Rect')
+        currentFunction = new DrawingArc(contextReal, contextDraft, options);
+        
+      });
+      
+
+      currentFunction = new Draw(contextReal, contextDraft, options);
+
+      $("#btnUndo").click(() => {
+        undoState();
+      });
+
+      $("#btnRedo").click(() => {
+        redoState();
+      });
+
+      $("#btnSave").click(() => {
+        const a = document.createElement("a");
+        document.body.appendChild(a);
+        a.href = canvasReal.toDataURL();
+        a.download = "canvas-image.jpg";
+        a.click();
+        document.body.removeChild(a);
+      });
+
+
+      $("#flat").spectrum({
+        showPaletteOnly: true,
+        togglePaletteOnly: true,
+        togglePaletteMoreText: "more",
+        togglePaletteLessText: "less",
+        color: "rgb (0, 0, 0, 1)",
+        palette: [
+          [
+            "rgb (0, 0, 0, 1)",
+            "rgb (68,68,68,1)",
+            "rgb (102,102,102,1)",
+            "rgba(153, 153, 153, 1)",
+            "rgba(204, 204, 204, 1)",
+            "rgba(238, 238, 238, 1)",
+            "rgba(243, 243, 243, 1)",
+            "rgba(255, 255, 255, 1)"
+          ],
+          [
+            "rgb (255, 0, 0, 1)",
+            "rgba(255, 153, 0, 1)",
+            "rgba(255, 255, 0, 1)",
+            "rgba(0, 255, 0, 1)",
+            "rgba(0, 255, 255, 1)",
+            "rgba(0, 0, 255, 1)",
+            "rgba(153, 0, 255, 1)",
+            "rgba(255, 0, 255, 1)"
+          ],
+          [
+            "rgba(204, 0, 0, 1)",
+            "rgba(230, 145, 56, 1)",
+            "rgba(241, 194, 50, 1)",
+            "rgba(106, 168, 79, 1)",
+            "rgba(69, 129, 142, 1)",
+            "rgba(61, 133, 198, 1)",
+            "rgba(103, 78, 167, 1)",
+            "rgba(166, 77, 121, 1)"
+          ],
+          [
+            "rgba(153, 0, 0, 1)",
+            "rgba(180, 95, 6, 1)",
+            "rgba(191, 144, 0, 1)",
+            "rgba(56, 118, 29, 1)",
+            "rgba(19, 79, 92, 1)",
+            "rgba(11, 83, 148, 1)",
+            "rgba(53, 28, 117, 1)",
+            "rgba(116, 27, 71, 1)"
+          ],
+          [
+            "rgba(102, 0, 0, 1)",
+            "rgba(120, 63, 4, 1)",
+            "rgba(127, 96, 0, 1)",
+            "rgba(39, 78, 19, 1)",
+            "rgba(12, 52, 61, 1)",
+            "rgba(7, 55, 99, 1)",
+            "rgba(32, 18, 77, 1)",
+            "rgba(76, 17, 48, 1)"
+          ]
+        ]
+      });
+
+
+      $("#btnClear").click(() => {
+        contextDraft.clearRect(0, 0, canvasDraft.width, canvasDraft.height);
+        contextReal.clearRect(0, 0, canvasReal.width, canvasDraft.height);
+      });
+
+
+
+      // $("#flat").change(function () {
+      //     console.log($("#flat").val())
+      // })    
+
+      // function random_bg_color() {
+      //   var x = Math.floor(Math.random() * 256);
+      //   var y = Math.floor(Math.random() * 256);
+      //   var z = Math.floor(Math.random() * 256);
+      //   var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+      //   console.log(bgColor);
+
+      //   document.body.style.background = bgColor;
+      // }
+
+      // random_bg_color();
+    </script>
+</body>
+
+</html>

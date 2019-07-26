@@ -1,16 +1,20 @@
 class Draw extends PaintFunction {
-  constructor(contextReal) {
+  constructor(contextReal, contextDraft, options) {
     super();
     this.context = contextReal;
+    this.contextDraft = contextDraft;
+    this.color = options.strokeStyle;
+    this.size = options.lineWidth;
   }
 
-  onMouseDown(coord, event) {
-    this.context.strokeStyle = "#df4b26";
+  onMouseDown(coord, event, options) {
+    this.context.strokeStyle = options.strokeStyle;
+    this.context.lineWidth = options.lineWidth;
     this.context.lineJoin = "round";
-    this.context.lineWidth = 5;
     this.context.beginPath();
     this.context.moveTo(coord[0], coord[1]);
     this.draw(coord[0], coord[1]);
+    console.log(this.color);
   }
   onDragging(coord, event) {
     this.draw(coord[0], coord[1]);

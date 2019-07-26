@@ -1,13 +1,14 @@
 class Erase extends PaintFunction {
-  constructor(contextReal) {
+  constructor(contextReal, contextDraft, options, size) {
     super();
     this.context = contextReal;
+    this.size = options.lineWidth;
   }
 
-  onMouseDown(coord, event) {
+  onMouseDown(coord, event, options) {
     this.context.strokeStyle = "#ffffff";
+    this.context.lineWidth = options.lineWidth;
     this.context.lineJoin = "round";
-    this.context.lineWidth = 10;
     this.context.beginPath();
     this.context.moveTo(coord[0], coord[1]);
     this.draw(coord[0], coord[1]);
